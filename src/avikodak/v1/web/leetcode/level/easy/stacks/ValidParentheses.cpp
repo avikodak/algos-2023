@@ -41,9 +41,10 @@ public:
                 }
                 auxSpace.pop();
                 break;
-            }
             default:
-            return false;
+                return false;
+            }
+
         }
         return auxSpace.size() == 0;
     }
