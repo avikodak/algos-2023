@@ -1,9 +1,9 @@
 /****************************************************************************************************************************************************
- *  File Name                   : Sqrtx.cpp
- *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/math/Sqrtx.cpp
- *  Created on                  : Jan 24, 2023 :: 6:09:24 PM
+ *  File Name                   : MaxDepth.cpp
+ *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/trees/MaxDepth.cpp
+ *  Created on                  : Jan 24, 2023 :: 7:53:42 PM
  *  Author                      : avikodak
- *  URL                         : https://leetcode.com/problems/sqrtx/
+ *  URL                         : https://leetcode.com/problems/maximum-depth-of-binary-tree
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -12,15 +12,15 @@
 
 #include "v1/common/Includes.h"
 
+using namespace std;
+
 class Solution {
 public:
-    int mySqrt(int userInput) {
-        if (userInput <= 1) {
-            return userInput;
+    int maxDepth(TreeNode *root) {
+        if (root == nullptr) {
+            return 0;
         }
-        int left = mySqrt(userInput >> 2) << 1;
-        int right = left + 1;
-        return (long) right * right > userInput ? left : right;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
     }
 };
 

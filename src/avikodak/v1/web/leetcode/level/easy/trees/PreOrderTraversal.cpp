@@ -1,9 +1,9 @@
 /****************************************************************************************************************************************************
- *  File Name                   : Sqrtx.cpp
- *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/math/Sqrtx.cpp
- *  Created on                  : Jan 24, 2023 :: 6:09:24 PM
+ *  File Name                   : PreOrderTraversal.cpp
+ *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/trees/PreOrderTraversal.cpp
+ *  Created on                  : Jan 24, 2023 :: 7:54:57 PM
  *  Author                      : avikodak
- *  URL                         : https://leetcode.com/problems/sqrtx/
+ *  URL                         : https://leetcode.com/problems/binary-tree-preorder-traversal/
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -12,15 +12,22 @@
 
 #include "v1/common/Includes.h"
 
+using namespace std;
+
 class Solution {
-public:
-    int mySqrt(int userInput) {
-        if (userInput <= 1) {
-            return userInput;
+private:
+    void preOrderTraversalUtil(TreeNode *root, vector<int> &auxSpace) {
+        if (root == nullptr) {
+            return;
         }
-        int left = mySqrt(userInput >> 2) << 1;
-        int right = left + 1;
-        return (long) right * right > userInput ? left : right;
+        auxSpace.push_back(root->val);
+        preOrderTraversalUtil(root->left, auxSpace);
+        preOrderTraversalUtil(root->right, auxSpace);
+    }
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> result;
+        preOrderTraversalUtil(root, result);
+        return result;
     }
 };
-

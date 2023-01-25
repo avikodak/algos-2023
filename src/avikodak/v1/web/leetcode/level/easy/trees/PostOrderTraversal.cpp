@@ -1,9 +1,9 @@
 /****************************************************************************************************************************************************
- *  File Name                   : Sqrtx.cpp
- *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/math/Sqrtx.cpp
- *  Created on                  : Jan 24, 2023 :: 6:09:24 PM
+ *  File Name                   : PostOrderTraversal.cpp
+ *  File Location               : /algos-2023/src/avikodak/v1/web/leetcode/level/easy/trees/PostOrderTraversal.cpp
+ *  Created on                  : Jan 24, 2023 :: 7:57:46 PM
  *  Author                      : avikodak
- *  URL                         : https://leetcode.com/problems/sqrtx/
+ *  URL                         : TODO
  ****************************************************************************************************************************************************/
 
 /****************************************************************************************************************************************************/
@@ -12,15 +12,22 @@
 
 #include "v1/common/Includes.h"
 
+using namespace std;
+
 class Solution {
-public:
-    int mySqrt(int userInput) {
-        if (userInput <= 1) {
-            return userInput;
+private:
+    void postorderTraversalUtil(TreeNode *root, vector<int> &auxSpace) {
+        if (root == nullptr) {
+            return;
         }
-        int left = mySqrt(userInput >> 2) << 1;
-        int right = left + 1;
-        return (long) right * right > userInput ? left : right;
+        postorderTraversalUtil(root->left, auxSpace);
+        postorderTraversalUtil(root->right, auxSpace);
+        auxSpace.push_back(root->val);
+    }
+public:
+    vector<int> postorderTraversal(TreeNode *root) {
+        vector<int> auxSpace;
+        postorderTraversalUtil(root, auxSpace);
+        return auxSpace;
     }
 };
-
